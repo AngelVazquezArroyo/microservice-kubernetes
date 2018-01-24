@@ -1,3 +1,6 @@
 #!/bin/sh
-kubectl delete service apache catalog customer order hystrix-dashboard
-kubectl delete deployments apache catalog customer order hystrix-dashboard
+kubectl delete -f apache/apache.yaml
+kubectl delete -f microservice-kubernetes-demo-catalog/catalog.yaml
+kubectl delete -f microservice-kubernetes-demo-customer/customer.yaml
+kubectl delete -f microservice-kubernetes-demo-order/order.yaml
+kubectl delete -f microservice-kubernetes-demo-hystrix-dashboard/hystrix-dashboard.yaml
