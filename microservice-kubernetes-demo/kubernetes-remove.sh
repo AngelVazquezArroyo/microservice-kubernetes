@@ -1,4 +1,6 @@
 #!/bin/sh
+kubectl delete configmap startpage-content
+kubectl delete -f startpage/startpage.yaml
 kubectl delete -f apache/apache.yaml
 kubectl delete -f microservice-kubernetes-demo-catalog/catalog.yaml
 kubectl delete -f microservice-kubernetes-demo-customer/customer.yaml

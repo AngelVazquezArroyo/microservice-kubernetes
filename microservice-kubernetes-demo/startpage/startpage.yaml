@@ -1,0 +1,62 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    run: startpage
+  name: startpage
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: startpage
+  template:
+    metadata:
+      labels:
+        run: startpage
+    spec:
+      containers:
+      - image: nginx:latest
+        name: startpage
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: content
+          mountPath: /usr/share/nginx/html/
+      volumes:
+        - name: content
+          configMap:
+            name: startpage-content
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    run: startpage
+  name: startpage
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    run: startpage
+  type: ClusterIP
+
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: startpage
+  annotations:
+    ingress.kubernetes.io/ssl-redirect: "false"
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        backend:
+          serviceName: startpage
+          servicePort: 80
