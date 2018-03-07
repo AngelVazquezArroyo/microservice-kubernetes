@@ -44,10 +44,10 @@ kind: Ingress
 metadata:
   name: hystrix-dashboard
   annotations:
-    ingress.kubernetes.io/ssl-redirect: "false"
 spec:
   rules:
-  - http:
+  - host: minikube
+    http:
       paths:
       - path: /hystrix
         backend:

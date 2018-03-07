@@ -45,10 +45,10 @@ metadata:
   name: catalog
   annotations:
     ingress.kubernetes.io/rewrite-target: /
-    ingress.kubernetes.io/ssl-redirect: "false"
 spec:
   rules:
-  - http:
+  - host: minikube
+    http:
       paths:
       - path: /catalog
         backend:
