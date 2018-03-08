@@ -44,7 +44,7 @@ kind: Ingress
 metadata:
   name: customer
   annotations:
-    ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/rewrite-target: "/"
 spec:
   rules:
   - host: minikube
